@@ -35,3 +35,6 @@ Feature: Test loqbox signup form
     Then User verifies error message display for invalid email address
     When User refreshes the signup page
     And User enters password as less than 12 characters
+    Then User verifies error message display for password less than 12 characters
+    When User enters password without special characters
+    Then User verifies error message display for password without special characters

@@ -32,7 +32,8 @@ public class SignUpPageActions {
     //generate fake password with minimum length 12, maximum length 15, minimum 1 uppercase,
     // minimum 1 special character and minimum 1 number
     String password = faker.internet().password(12, 15, true, true, true);
-    String mobile = faker.phoneNumber().phoneNumber(); //generate fake phone number
+    String passwordWithLessThanTwelveCharacters = faker.internet().password(10, 11, true, true, true);
+    String passwordWithoutSpecialCharacters = faker.internet().password(12, 15, true, false, true);
 
     public SignUpPageActions() {
         signUpPageLocators = new SignUpPageLocators();
@@ -276,5 +277,25 @@ public class SignUpPageActions {
 
     public void verifyErrorMessageDisplayForInvalidEmailAddress() {
         assertThat(BasePage.getText(signUpPageLocators.emailErrorMessage), is("Enter valid Email"));
+    }
+
+    public void enterInvalidPassword() {
+        BasePage.waitUntilElementPresent(signUpPageLocators.password, 60);
+        BasePage.typeWithStringBuilder(signUpPageLocators.password, passwordWithLessThanTwelveCharacters);
+        BasePage.clickTabKey(signUpPageLocators.password);
+    }
+
+    public void verifyPasswordRequiredLengthErrorMessage() {
+        assertThat(BasePage.getText(signUpPageLocators.passwordErrorMessage), is("Password must be at least 12 characters"));
+    }
+
+    public void passwordWithoutSpecialCharacters() {
+        BasePage.clearTexts(signUpPageLocators.password);
+        BasePage.typeWithStringBuilder(signUpPageLocators.password, passwordWithoutSpecialCharacters);
+        BasePage.clickTabKey(signUpPageLocators.password);
+    }
+
+    public void verifyPasswordWithoutSpecialCharacterErrorMessage() {
+        assertThat(BasePage.getText(signUpPageLocators.passwordErrorMessage), is("Password must contain at least one special character, e.g. @$!%*#?&"));
     }
 }

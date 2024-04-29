@@ -76,7 +76,23 @@ public class SignUpSteps {
         signUpPageActions.verifyErrorMessageDisplayForInvalidEmailAddress();
     }
 
-    @And("User enters password as less than {int} characters")
-    public void userEntersPasswordAsLessThanCharacters(int arg0) {
+    @And("User enters password as less than 12 characters")
+    public void userEntersPasswordAsLessThanCharacters() {
+        signUpPageActions.enterInvalidPassword();
+    }
+
+    @Then("User verifies error message display for password less than 12 characters")
+    public void verifyErrorMessageForPasswordLessThanTwelveCharacters() {
+        signUpPageActions.verifyPasswordRequiredLengthErrorMessage();
+    }
+
+    @When("User enters password without special characters")
+    public void enterPasswordWithoutSpecialCharacters() {
+        signUpPageActions.passwordWithoutSpecialCharacters();
+    }
+
+    @Then("User verifies error message display for password without special characters")
+    public void verifyErrorMessageForPasswordWithoutSpecialCharacters() {
+        signUpPageActions.verifyPasswordWithoutSpecialCharacterErrorMessage();
     }
 }

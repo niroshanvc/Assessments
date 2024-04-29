@@ -81,39 +81,10 @@ public class BasePage {
         element.click();
     }
 
-    public static boolean isElementPresent(WebElement ele, int timeOutSeconds) {
-        try {
-            // present and visible
-            waitUntilElementPresent(ele, timeOutSeconds);
-        } catch (Exception ex) {
-            return false;
-        }
-        return true;
-    }
-
     public static void scrollToWebElement(WebElement ele) {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("arguments[0].scrollIntoView(true);", ele);
     }
-
-    public static void uploadFileUsingSendKeys(WebElement ele, String filePath) {
-        scrollToWebElement(ele);
-        String fullFilePathToBeUploaded = System.getProperty("user.dir") + "\\src\\test" + filePath;
-        ele.sendKeys(fullFilePathToBeUploaded);
-    }
-
-    public static void selectByVisibleText(WebElement we, String text) {
-        Select sel = new Select(we);
-        sel.selectByVisibleText(text);
-    }
-
-
-    public static void moveMousePointerUsingActionClass(WebElement ele) {
-        new Actions(driver)
-                .moveToElement(ele)
-                .perform();
-    }
-
 
     public static void clickWithJavaScript(WebElement ele) {
         waitUntilElementPresent(ele, 30);
@@ -197,9 +168,8 @@ public class BasePage {
         driver.navigate().refresh();
     }
 
-    public static void waitUntilElementVisible(By by, int timeOutSeconds) {
-        // present and visible
-        wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutSeconds));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    public static void clearTexts(WebElement element) {
+        logger.info("Clear texts in %s", element);
+        element.clear();
     }
 }

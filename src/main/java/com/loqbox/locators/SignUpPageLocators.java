@@ -108,7 +108,7 @@ public class SignUpPageLocators {
     @FindBy(id = "signup/create-account/email-helper-text")
     public WebElement emailErrorMessage;
 
-    @FindBy(id = "signup/create-account/password-helper-text")
+    @FindBy(xpath = "//p[contains(@id, 'password')]")
     public WebElement passwordErrorMessage;
 
     @FindBy(xpath = "//input[@name='dob']/../../p")
