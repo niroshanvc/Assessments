@@ -1,6 +1,5 @@
 package com.loqbox.locators;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -119,4 +118,22 @@ public class SignUpPageLocators {
 
     @FindBy(id = "signup/create-account/post-code-helper-text")
     public WebElement postcodeErrorMessage;
+
+    @FindBy(name = "buildingName")
+    public WebElement buildingName;
+
+    @FindBy(name = "buildingNumber")
+    public WebElement buildingNumber;
+
+    @FindBy(name = "address1")
+    public WebElement addressLine1;
+
+    @FindBy(name = "address2")
+    public WebElement addressLine2;
+
+    @FindBy(name = "town")
+    public WebElement town;
+
+    @FindBy(name = "state")
+    public WebElement county;
 }

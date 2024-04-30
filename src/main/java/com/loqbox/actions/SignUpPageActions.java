@@ -26,14 +26,19 @@ public class SignUpPageActions {
     private final Faker faker = new Faker(Locale.UK);
     Random random = new Random();
 
-    public final String firstName = faker.name().firstName(); //generate fake first name
-    String lastName = faker.name().lastName(); //generate fake last name
-    String email = faker.internet().emailAddress(); //generate fake email address
+    private final String firstName = faker.name().firstName(); //generate fake first name
+
+    private final String lastName = faker.name().lastName(); //generate fake last name
+
+    private final String email = faker.internet().emailAddress(); //generate fake email address
+
     //generate fake password with minimum length 12, maximum length 15, minimum 1 uppercase,
     // minimum 1 special character and minimum 1 number
-    String password = faker.internet().password(12, 15, true, true, true);
-    String passwordWithLessThanTwelveCharacters = faker.internet().password(10, 11, true, true, true);
-    String passwordWithoutSpecialCharacters = faker.internet().password(12, 15, true, false, true);
+    private final String password = faker.internet().password(12, 15, true, true, true);
+
+    private final String passwordWithLessThanTwelveCharacters = faker.internet().password(10, 11, true, true, true);
+
+    private final String passwordWithoutSpecialCharacters = faker.internet().password(12, 15, true, false, true);
 
     public SignUpPageActions() {
         signUpPageLocators = new SignUpPageLocators();
@@ -44,7 +49,7 @@ public class SignUpPageActions {
         BasePage.navigate("url");
     }
 
-    public void fillSignUpForm() {
+    public void fillSignUpForm()  {
         BasePage.waitUntilElementPresent(signUpPageLocators.firstName, 90);
         BasePage.typeWithStringBuilder(signUpPageLocators.firstName, firstName);
         BasePage.clickTabKey(signUpPageLocators.firstName);
@@ -61,8 +66,16 @@ public class SignUpPageActions {
         BasePage.clickAfterWait(signUpPageLocators.lookUpButton);
         BasePage.waitUntilElementPresent(signUpPageLocators.addressElement, 10);
         BasePage.selectFirstOption(signUpPageLocators.addressXpath);
-        BasePage.waitUntilElementClickable(signUpPageLocators.nextButton, 10);
-        BasePage.scrollToWebElement(signUpPageLocators.nextButton);
+        BasePage.waitFor(1000);
+
+        //scroll down to the next button, using tab key
+        BasePage.clickTabKey(signUpPageLocators.addressElement);
+        BasePage.clickTabKey(signUpPageLocators.buildingName);
+        BasePage.clickTabKey(signUpPageLocators.buildingNumber);
+        BasePage.clickTabKey(signUpPageLocators.addressLine1);
+        BasePage.clickTabKey(signUpPageLocators.addressLine2);
+        BasePage.clickTabKey(signUpPageLocators.town);
+        BasePage.clickTabKey(signUpPageLocators.county);
         BasePage.clickAfterWait(signUpPageLocators.nextButton);
     }
 
@@ -112,6 +125,7 @@ public class SignUpPageActions {
         //selecting correct date
         List<WebElement> dateElements = BasePage.findListOfWebElements(signUpPageLocators.dates);
         for(int i=0; i<dateElements.size(); i++){
+            BasePage.waitFor(50);
             if(dateElements.get(i).getText().equals(day)) {
                 BasePage.clickAfterWait(dateElements.get(i));
                 break;
@@ -149,6 +163,7 @@ public class SignUpPageActions {
 
     public void verifyPerWeekAmount(String planAmount) {
         BasePage.waitUntilElementPresent(signUpPageLocators.perWeek, 30);
+        BasePage.scrollDownUntilVisible(signUpPageLocators.perWeek);
         String perWeekTexts = BasePage.getText(signUpPageLocators.perWeek);
 
         //split the above text using space character and gets the first element
@@ -162,6 +177,7 @@ public class SignUpPageActions {
 
     public void completeSignUpProcess() {
         BasePage.waitUntilElementClickable(signUpPageLocators.nextButton, 30);
+        BasePage.moveToBottomOfThePage();
         BasePage.clickAfterWait(signUpPageLocators.nextButton);
         BasePage.waitUntilElementClickable(signUpPageLocators.showMeHowButton, 30);
         BasePage.clickAfterWait(signUpPageLocators.showMeHowButton);
@@ -169,7 +185,7 @@ public class SignUpPageActions {
 
     public void clickNextOnEveryPointMatters() {
         BasePage.waitUntilElementClickable(signUpPageLocators.nextButton, 30);
-        BasePage.scrollToWebElement(signUpPageLocators.nextButton);
+        BasePage.scrollToBottomOfPage();
         BasePage.clickAfterWait(signUpPageLocators.nextButton);
     }
 

@@ -1,6 +1,5 @@
 package com.loqbox.actions;
 
-import com.loqbox.locators.SignUpPageLocators;
 import com.loqbox.locators.WelcomePageLocators;
 import com.loqbox.utils.BasePage;
 import com.loqbox.utils.GlobalVariables;
@@ -12,7 +11,6 @@ import static org.hamcrest.core.Is.is;
 public class WelcomePageActions {
 
     WelcomePageLocators welcomePageLocators;
-    SignUpPageLocators signUpPageLocators;
 
     public WelcomePageActions() {
         welcomePageLocators = new WelcomePageLocators();

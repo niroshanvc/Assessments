@@ -37,7 +37,7 @@ public class BasePage {
         } else if (browser.equalsIgnoreCase("Chrome")) {
             WebDriverManager.chromedriver().clearDriverCache().setup();
             WebDriverManager.chromedriver().clearResolutionCache().setup();
-//            WebDriverManager.chromedriver().setup();
+            WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
             options.addArguments("--start-maximized");
@@ -171,5 +171,32 @@ public class BasePage {
     public static void clearTexts(WebElement element) {
         logger.info("Clear texts in %s", element);
         element.clear();
+    }
+
+    public static void moveToBottomOfThePage() {
+        logger.info("Move to bottom of the page.");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public static void waitFor(int milliseconds) {
+        logger.info("Wait for %s milliseconds", milliseconds);
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void scrollDownUntilVisible(WebElement element) {
+        logger.info("Scroll down until visible %s", element);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollToBottomOfPage() {
+        logger.info("Scroll down to bottom of the page.");
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.END).perform();
     }
 }
