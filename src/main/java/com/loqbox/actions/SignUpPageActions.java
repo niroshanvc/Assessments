@@ -148,6 +148,7 @@ public class SignUpPageActions {
     }
 
     public void verifyPerWeekAmount(String planAmount) {
+        BasePage.waitUntilElementPresent(signUpPageLocators.perWeek, 30);
         String perWeekTexts = BasePage.getText(signUpPageLocators.perWeek);
 
         //split the above text using space character and gets the first element
@@ -290,6 +291,7 @@ public class SignUpPageActions {
     }
 
     public void passwordWithoutSpecialCharacters() {
+        BasePage.waitUntilElementPresent(signUpPageLocators.password, 60);
         BasePage.clearTexts(signUpPageLocators.password);
         BasePage.typeWithStringBuilder(signUpPageLocators.password, passwordWithoutSpecialCharacters);
         BasePage.clickTabKey(signUpPageLocators.password);

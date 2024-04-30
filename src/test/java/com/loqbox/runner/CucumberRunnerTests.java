@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
         features = "src/test/resources/features",
         glue = {"com.loqbox.steps", "com.loqbox.hooks"},
         plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        tags = "@SignUp_NegativeScenario"
+        tags = "@Regression"
 )
 
 public class CucumberRunnerTests extends AbstractTestNGCucumberTests {

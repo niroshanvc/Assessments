@@ -86,7 +86,7 @@ public class SignUpSteps {
         signUpPageActions.verifyPasswordRequiredLengthErrorMessage();
     }
 
-    @When("User enters password without special characters")
+    @When("User enters password without a special character")
     public void enterPasswordWithoutSpecialCharacters() {
         signUpPageActions.passwordWithoutSpecialCharacters();
     }
